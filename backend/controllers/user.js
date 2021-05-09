@@ -97,9 +97,22 @@ function loginUser(req, res) {
     });
 }
 
+function getUser(req, res) {
+    const userId = req.params.id;
+
+    User.findById(userId, (err, user) => {
+        if (err) return res.status(500).send({ message: 'request error' });
+
+        if (!user) return res.status(404).send({ message: 'the user does not exist in the database' });
+
+        return res.status(200).send({ user });
+    })
+}
+
 module.exports = {
     home,
     test,
     saveUser,
-    loginUser
+    loginUser,
+    getUser
 }
