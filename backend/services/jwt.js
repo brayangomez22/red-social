@@ -5,7 +5,7 @@ const moment = require('moment');
 const secret = 'secret key of my social network';
 
 exports.createToken = function (user) {
-    const payload = {
+    let payload = {
         sub: user._id,
         name: user.name,
         surname: user.surname,
