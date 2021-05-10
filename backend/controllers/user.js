@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt-nodejs');
 const User = require('../models/user');
 const jwt = require('../services/jwt');
 const mongoosePagination = require('mongoose-pagination');
+const fs = require('fs');
+const path = require('path');
 
 const home = (req, res) => {
     res.status(200).send({
@@ -155,6 +157,43 @@ function updateUser(req, res) {
     });
 }
 
+function uploadImage(req, res) {
+    const userId = req.params.id;
+
+    if (req.files) {
+        var file_path = req.files.image.path;
+        var file_split = file_path.split('/');
+        var file_name = file_split[2];
+        var ext_split = file_name.split('\.');
+        var file_ext = ext_split[1];
+
+        if (userId != req.user.sub) {
+            return removeFilesOfUploads(res, file_path, 'you do not have permission to update user data');
+        }
+
+        if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'jpeg' || file_ext == 'gif') {
+            User.findByIdAndUpdate(userId, { image: file_name }, { new: true }, (err, userUpdated) => {
+                if (err) return res.status(500).send({ message: 'request error' });
+
+                if (!userUpdated)
+                    return res.status(404).send({ message: 'the user could not be updated' });
+
+                return res.status(200).send({ user: userUpdated });
+            });
+        } else {
+            return removeFilesOfUploads(res, file_path, 'extension not valid');
+        }
+    } else {
+        return res.status(200).send({ message: 'no images have been uploaded' });
+    }
+}
+
+function removeFilesOfUploads (res, file_path, message) {
+    fs.unlink(file_path, (err) => {
+        return res.status(200).send({ message: message });
+    });
+}
+
 module.exports = {
     home,
     test,
@@ -162,5 +201,6 @@ module.exports = {
     loginUser,
     getUser,
     getUsers,
-    updateUser
+    updateUser,
+    uploadImage
 }
