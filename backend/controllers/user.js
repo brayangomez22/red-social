@@ -134,11 +134,33 @@ function getUsers(req, res) {
     });
 }
 
+function updateUser(req, res) {
+    const userId = req.params.id;
+    const update = req.body;
+
+    delete update.password;
+
+    if (userId != req.user.sub) {
+        return res
+            .status(500)
+            .send({ message: 'you do not have permission to update user data' });
+    }
+
+    User.findByIdAndUpdate(userId, update, { new: true }, (err, userUpdated) => {
+        if (err) return res.status(500).send({ message: 'request error' })
+
+        if (!userUpdated) return res.status(404).send({ message: 'the user could not be updated' });
+
+        return res.status(200).send({ user: userUpdated });
+    });
+}
+
 module.exports = {
     home,
     test,
     saveUser,
     loginUser,
     getUser,
-    getUsers
+    getUsers,
+    updateUser
 }
