@@ -3,6 +3,7 @@
 const bcrypt = require('bcrypt-nodejs');
 const User = require('../models/user');
 const jwt = require('../services/jwt');
+const mongoosePagination = require('mongoose-pagination');
 
 const home = (req, res) => {
     res.status(200).send({
@@ -109,10 +110,35 @@ function getUser(req, res) {
     })
 }
 
+function getUsers(req, res) {
+    const identity_user_id = req.user.sub;
+
+    var page = 1;
+    if (req.params.page) {
+        page = req.params.page;
+    }
+
+    const itemsPerPage = 5;
+
+    User.find().sort('_id').paginate(page, itemsPerPage, (err, users, total) => {
+        if (err) return res.status(500).send({ message: 'request error' });
+
+        if (!users)
+            return res.status(404).send({ message: 'no users available' });
+
+        return res.status(200).send({
+            users,
+            total,
+            pages: Math.ceil(total / itemsPerPage)
+        });
+    });
+}
+
 module.exports = {
     home,
     test,
     saveUser,
     loginUser,
-    getUser
+    getUser,
+    getUsers
 }
