@@ -194,6 +194,19 @@ function removeFilesOfUploads (res, file_path, message) {
     });
 }
 
+function getImageFile(req, res) {
+    const image_file = req.params.imageFile;
+    const path_file = './uploads/users/' + image_file;
+
+    fs.exists(path_file, (exists) => {
+        if (exists) {
+            res.sendFile(path.resolve(path_file));
+        } else {
+            res.status(200).send({ message: 'the image does not exist' });
+        }
+    });
+}
+
 module.exports = {
     home,
     test,
@@ -202,5 +215,6 @@ module.exports = {
     getUser,
     getUsers,
     updateUser,
-    uploadImage
+    uploadImage,
+    getImageFile
 }
