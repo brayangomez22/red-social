@@ -122,13 +122,13 @@ function getUser(req, res) {
 }
 
 async function followThisUsers(identity_user_id, user_id) {
-    var following = await Follow.findOne({ "user": identity_user_id, "followed": user_id }).exec().then((follow) => {
+    let following = await Follow.findOne({ "user": identity_user_id, "followed": user_id }).exec().then((follow) => {
         return follow;
     }).catch((err) => {
         return handleError(err);
     });
 
-    var followed = await Follow.findOne({ "user": user_id, "followed": identity_user_id }).exec().then((follow) => {
+    let followed = await Follow.findOne({ "user": user_id, "followed": identity_user_id }).exec().then((follow) => {
         return follow;
     }).catch((err) => {
         return handleError(err);
@@ -156,12 +156,47 @@ function getUsers(req, res) {
         if (!users)
             return res.status(404).send({ message: 'no users available' });
 
-        return res.status(200).send({
-            users,
-            total,
-            pages: Math.ceil(total / itemsPerPage)
+        followUserIds(identity_user_id).then((value) => {
+            return res.status(200).send({
+                users,
+                users_following: value.following,
+                users_follow_me: value.followed,
+                total,
+                pages: Math.ceil(total / itemsPerPage)
+            });
         });
     });
+}
+
+async function followUserIds(user_id){
+    let following = await Follow.find({"user": user_id}).select({'_id': 0, '__uv': 0, 'user': 0}).exec().then((follows)=>{
+        var follows_clean = [];
+        
+        follows.forEach((follow)=>{
+            follows_clean.push(follow.followed);
+        });
+
+        return follows_clean;
+    }).catch((err)=>{
+        return handleError(err)
+    });
+
+    let followed = await Follow.find({"followed": user_id}).select({'_id': 0, '__uv': 0, 'followed': 0}).exec().then((follows)=>{
+        var follows_clean=[];
+
+        follows.forEach((follow)=>{
+            follows_clean.push(follow.user);
+        });
+
+        return follows_clean;
+    }).catch((err)=>{
+        return handleError(err)
+    });
+
+    return {
+        following: following,
+        followed: followed
+    }
 }
 
 function updateUser(req, res) {
