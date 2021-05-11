@@ -2,6 +2,7 @@
 
 const bcrypt = require('bcrypt-nodejs');
 const User = require('../models/user');
+const Follow = require('../models/follow');
 const jwt = require('../services/jwt');
 const mongoosePagination = require('mongoose-pagination');
 const fs = require('fs');
@@ -108,7 +109,12 @@ function getUser(req, res) {
 
         if (!user) return res.status(404).send({ message: 'the user does not exist in the database' });
 
-        return res.status(200).send({ user });
+        Follow.findOne({ 'user': req.user.sub, 'followed': userId }).exec((err, follow) => {
+            if (err) return res.status(500).send({ message: 'error checking tracking' });
+            
+            return res.status(200).send({ user, follow });
+        });
+
     })
 }
 
