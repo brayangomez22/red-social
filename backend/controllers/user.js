@@ -109,13 +109,35 @@ function getUser(req, res) {
 
         if (!user) return res.status(404).send({ message: 'the user does not exist in the database' });
 
-        Follow.findOne({ 'user': req.user.sub, 'followed': userId }).exec((err, follow) => {
-            if (err) return res.status(500).send({ message: 'error checking tracking' });
+        followThisUsers(req.user.sub, userId).then((value) => {
+            user.password = undefined;
             
-            return res.status(200).send({ user, follow });
+            return res.status(200).send({
+                user,
+                following: value.following,
+                followed: value.followed
+            });
         });
-
     })
+}
+
+async function followThisUsers(identity_user_id, user_id) {
+    var following = await Follow.findOne({ "user": identity_user_id, "followed": user_id }).exec().then((follow) => {
+        return follow;
+    }).catch((err) => {
+        return handleError(err);
+    });
+
+    var followed = await Follow.findOne({ "user": user_id, "followed": identity_user_id }).exec().then((follow) => {
+        return follow;
+    }).catch((err) => {
+        return handleError(err);
+    });
+
+    return {
+        following: following,
+        followed: followed
+    }
 }
 
 function getUsers(req, res) {
