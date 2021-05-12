@@ -63,7 +63,7 @@ function getPublications(req, res) {
 }
 
 function getPublication(req, res) {
-	const publicationId = req.params.id
+	const publicationId = req.params.id;
 
 	Publication.findById(publicationId, (err, publication) => {
 		if (err) return res.status(500).send({ message: 'request error' });
@@ -72,11 +72,22 @@ function getPublication(req, res) {
 			return res.status(404).send({ message: 'the publication does not exist in the database' });
 
         return res.status(200).send({ publication });
-	})
+	});
+}
+
+function deletePublication(req, res) {
+	const publicationId = req.params.id;
+
+    Publication.find({ 'user': req.user.sub, _id: publicationId }).remove(err => {
+        if (err) return res.status(500).send({ message: 'error deleting post' });
+
+        return res.status(200).send({ message: 'post removed' });
+    });
 }
 
 module.exports = {
     savePublication,
     getPublications,
-    getPublication
+    getPublication,
+    deletePublication
 }
