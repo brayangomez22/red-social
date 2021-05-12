@@ -62,7 +62,21 @@ function getPublications(req, res) {
     });
 }
 
+function getPublication(req, res) {
+	const publicationId = req.params.id
+
+	Publication.findById(publicationId, (err, publication) => {
+		if (err) return res.status(500).send({ message: 'request error' });
+
+		if (!publication)
+			return res.status(404).send({ message: 'the publication does not exist in the database' });
+
+        return res.status(200).send({ publication });
+	})
+}
+
 module.exports = {
     savePublication,
-    getPublications
+    getPublications,
+    getPublication
 }
