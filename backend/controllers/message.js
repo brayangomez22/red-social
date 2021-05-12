@@ -25,8 +25,32 @@ function saveMessage(req, res) {
 
         return res.status(200).send({ message: messageStored });
     });
- }
+}
+
+function getReceivedMessages(req, res) {
+    const userId = req.user.sub;
+
+    var page = 1;
+    if (req.params.page) {
+        page = req.params.page;
+    }
+
+    var itemsPerPage = 4;
+
+    Message.find({ receiver: userId }).populate('emitter').paginate(page, itemsPerPage, (err, messages, total) => {
+        if (err) return res.status(500).send({ message: 'request error' });
+
+        if (!messages) return res.status(404).send({ message: 'no messages' });
+        
+        return res.status(200).send({
+            total: total,
+            pages: Math.ceil(total / itemsPerPage),
+            messages
+        });
+    });
+}
 
 module.exports = {
-    saveMessage
+    saveMessage,
+    getReceivedMessages
 }
