@@ -91,9 +91,24 @@ function getUnViewedMessage(req, res) {
     });
 }
 
+function setViewedMessages(req, res) {
+    const userId = req.user.sub;
+
+    Message.update(
+        { receiver: userId, viewed: 'false' },
+        { viewed: 'true' }, { 'multi': true }, (err, messageUpdated) => {
+        if (err) return res.status(500).send({ message: 'request error' });
+
+        return res.status(200).send({
+            messages: messageUpdated
+        });
+    });
+}
+
 module.exports = {
     saveMessage,
     getReceivedMessages,
     getEmitterMessages,
-    getUnViewedMessage
+    getUnViewedMessage,
+    setViewedMessages
 }
