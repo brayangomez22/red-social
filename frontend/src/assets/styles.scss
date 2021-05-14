@@ -4,10 +4,15 @@
     margin: o;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
+}
+
+.active {
+    background: #cc1717;
 }
 
 .h1-strong {
@@ -30,5 +35,9 @@ body {
         border-radius: 0 !important;
         background: #e53c37 !important;
         border: none;
+
+        & a:hover {
+            background: #cc1717 !important;
+        }
     }
 }
