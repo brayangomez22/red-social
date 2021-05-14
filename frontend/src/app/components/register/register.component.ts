@@ -13,12 +13,14 @@ export class RegisterComponent implements OnInit {
 
     public title: string;
     public user: User;
+    public status: string;
 
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
         private _userService: UserService
     ) {
+        this.status = "";
         this.title = 'Registrate';
         this.user = new User(
             "",
@@ -36,7 +38,19 @@ export class RegisterComponent implements OnInit {
         console.log("Componente de registro cargando...");
     }
 
-    onSubmit() {
-        this._userService.register(this.user);
+    onSubmit(form: { reset: () => void; }) {
+        this._userService.register(this.user).subscribe(
+            response => {
+                if (response.user && response.user._id) {
+                    this.status = 'success';
+                    form.reset();
+                } else {
+                    this.status = 'error';
+                }
+            },
+            error => {
+                console.log(<any>error);
+            }
+        );
     }
 }
