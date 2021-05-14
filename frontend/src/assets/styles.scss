@@ -10,6 +10,15 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.h1-strong {
+    font-size: 35px;
+    font-weight: bold;
+    margin-left: 13px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
 .navigation .navbar * {
     color: white !important;
 }
