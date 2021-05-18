@@ -10,6 +10,7 @@ export class UserService{
     public url: string;
     public identity;
     public token;
+    stats: any;
 
     constructor(public _http: HttpClient) {
         this.url = GLOBAL.url;
@@ -22,7 +23,7 @@ export class UserService{
         return this._http.post(this.url + 'register', params, { headers: headers });
     }
 
-    login(user: User, gettoken: string | null | undefined): Observable<any> {
+    login(user, gettoken: string | null | undefined): Observable<any> {
         if(gettoken != null){
             user = Object.assign(user, {gettoken});
         }
@@ -55,5 +56,28 @@ export class UserService{
         }
 
         return this.token;
+    }
+
+    getStats() {
+        let stats = JSON.parse(localStorage.getItem('stats')!);
+
+        if (stats != 'undefined') {
+            this.stats = stats;
+        } else {
+            this.stats = null;
+        }
+
+        return this.stats;
+    }
+
+    getCounters(userId = null): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                    .set('Authorization', this.getToken());
+                                    
+        if (userId != null) {
+            return this._http.get(this.url + 'counters/'+userId, { headers: headers });
+        } else {
+            return this._http.get(this.url + 'counters/', { headers: headers });
+        }
     }
 }
