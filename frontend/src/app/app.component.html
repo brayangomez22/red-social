@@ -1,45 +1,78 @@
-<div class="navigation col-lg-12">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="#" class="navbar-brand">{{title}}</a>
-            </div>
+<nav>
+    <input type="checkbox" id="check">
 
-            <ul class="nav navbar-nav" *ngIf="identity">
+    <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+    </label>
+
+    <label class="logo">{{title}}</label>
+
+    <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
+        <li>
+            <a [routerLink]="['/login']" [routerLinkActive]="['active']">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/register']" [routerLinkActive]="['active']">
+                <i class="fas fa-restroom"></i> Register
+            </a>
+        </li>
+    </ul>
+
+    <ul class="nav navbar-nav" *ngIf="identity">
+        <li>
+            <a [routerLink]="['/home']" [routerLinkActive]="['active']">
+                <i class="fas fa-home"></i> Home
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class="fas fa-stream"></i> TimeLine
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class="fas fa-user-friends"></i> People
+            </a>
+        </li>
+
+        <li class="avatar">
+
+        </li>
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {{identity.name}} <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu">
                 <li>
-                    <a [routerLink]="['/home']" [routerLinkActive]="['active']">
-                        <span class="glyphicon glyphicon-home"> Inicio</span>
+                    <a href="#">
+                        <i class="fas fa-user-circle"></i>
+                        My Profile
                     </a>
                 </li>
 
                 <li>
                     <a href="#">
-                        <span class="glyphicon glyphicon-th-list"> TimeLine</span>
+                        <i class="fas fa-database"></i>
+                        My Data
                     </a>
                 </li>
 
                 <li>
                     <a href="#">
-                        <span class="glyphicon glyphicon-user"> Gente</span>
+                        <i class="fas fa-sign-out-alt"></i>
+                        Log Out
                     </a>
                 </li>
             </ul>
-
-            <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
-                <li>
-                    <a [routerLink]="['/login']" [routerLinkActive]="['active']">
-                        <span class="glyphicon glyphicon-log-in"> Login</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a [routerLink]="['/register']" [routerLinkActive]="['active']">
-                        <span class="glyphicon glyphicon-user"> Register</span>
-                    </a>
-                </li>
-            </ul>            
-        </div>
-    </nav>
-</div>
+        </li>
+    </ul>
+</nav>
 
 <router-outlet></router-outlet>

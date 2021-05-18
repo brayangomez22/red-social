@@ -31,10 +31,12 @@
               "src/assets"
             ],
             "styles": [
+                "node_modules/@fortawesome/fontawesome-free/css/all.css",
                 "./node_modules/bootstrap/dist/css/bootstrap.min.css",
                 "src/assets/styles.scss"
             ],
             "scripts": [
+                "node_modules/@fortawesome/fontawesome-free/js/all.js",
                 "./node_modules/jquery/dist/jquery.min.js",
                 "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]

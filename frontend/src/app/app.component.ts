@@ -9,7 +9,7 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit, DoCheck {
     public title: string;
-    public identity: string | undefined;
+    public identity;
 
     constructor(
         private _useService: UserService
