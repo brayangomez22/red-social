@@ -5,7 +5,9 @@
         <i class="fas fa-bars"></i>
     </label>
 
-    <label class="logo">{{title}}</label>
+    <a [routerLink]="['/home']">
+        <label class="logo">{{title}}</label>
+    </a>
 
     <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
         <li>
@@ -58,7 +60,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a [routerLink]="['/my-data']">
                         <i class="fas fa-database"></i>
                         My Data
                     </a>
