@@ -1,0 +1,9 @@
+.jumbotron{
+    padding: 25px;
+    border-radius: 5px;
+    text-align: center;
+
+    & a {
+        margin-left: 15px;
+    }
+}

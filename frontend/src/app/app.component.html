@@ -7,7 +7,7 @@
 
             <ul class="nav navbar-nav" *ngIf="identity">
                 <li>
-                    <a href="#">
+                    <a [routerLink]="['/home']" [routerLinkActive]="['active']">
                         <span class="glyphicon glyphicon-home"> Inicio</span>
                     </a>
                 </li>
