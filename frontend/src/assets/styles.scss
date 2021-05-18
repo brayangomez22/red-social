@@ -68,6 +68,10 @@ nav{
 
     & .dropdown-menu {
         color: #eee !important;
+
+        & li {
+            cursor: pointer;
+        }
     }
 }
 
