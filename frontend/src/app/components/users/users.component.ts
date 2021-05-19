@@ -22,7 +22,9 @@ export class UsersComponent implements OnInit {
     public total;
     public pages;
     public users: User[];
+    public follows;
     public status: string;
+    public followUserOver;
 
     constructor(
         private _route: ActivatedRoute,
@@ -74,6 +76,7 @@ export class UsersComponent implements OnInit {
                     this.total = response.total;
                     this.users = response.users;
                     this.pages = response.pages;
+                    this.follows = response.users_following;
 
                     if (page > this.pages) {
                         this._router.navigate(['/people',1]);
@@ -89,5 +92,13 @@ export class UsersComponent implements OnInit {
                 }
             }
         );
+    }
+
+    mouseEnter(user_id) {
+        this.followUserOver = user_id;
+    }
+
+    mouseLeave(user_id) {
+        this.followUserOver = 0;
     }
 }
