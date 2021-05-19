@@ -21,12 +21,12 @@ export class RegisterComponent implements OnInit {
         private _userService: UserService
     ) {
         this.status = "";
-        this.title = 'Registrate';
+        this.title = 'Sign up';
         this.user = new User('', '', '', '', '', '', 'ROLE_USER', '');
     }
 
     ngOnInit(): void {
-        console.log("Componente de registro cargando...");
+        console.log('Registration component loading...');
     }
 
     onSubmit(form: { reset: () => void; }) {

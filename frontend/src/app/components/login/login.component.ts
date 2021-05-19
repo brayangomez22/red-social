@@ -23,12 +23,12 @@ export class LoginComponent implements OnInit {
         private _userService: UserService
     ) {
         this.status = '';
-        this.title = 'Identificate';
+        this.title = 'Login';
         this.user = new User('', '', '', '', '', '', 'ROLE_USER', '');
     }
 
     ngOnInit(): void {
-        console.log("Componente de login cargando...");
+        console.log('Login component loading...');
     }
 
     onSubmit() {

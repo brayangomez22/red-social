@@ -1,3 +1,35 @@
 <div class="col-lg-5">
     <h1 class="h1-strong">{{title}}</h1>
+
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        Your details have been updated correctly
+    </div>
+
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+        Your data could not be updated
+    </div>
+
+    <form #userEditForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
+        <p>
+            <label>Name *</label>
+            <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control" required>
+        </p>
+
+        <p>
+            <label>Surnames *</label>
+            <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" required>
+        </p>
+
+        <p>
+            <label>Nickname *</label>
+            <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" required>
+        </p>
+
+        <p>
+            <label>Email *</label>
+            <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        </p>
+
+        <input type="submit" value="{{title}}" class="btn btn-warning" [disabled]="!userEditForm.form.valid" />
+    </form>
 </div>
