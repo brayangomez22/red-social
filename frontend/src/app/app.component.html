@@ -73,6 +73,7 @@
 
         <li class="avatar">
             <img src="{{ url + 'get-image-user/' + identity.image }}" alt="Profile Image" *ngIf="identity && identity.image" />
+            <img src="assets/user.png" alt="Profile Image" *ngIf="!identity.image" />
         </li>
     </ul>
 </nav>

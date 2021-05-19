@@ -13,6 +13,7 @@ import { GLOBAL } from 'src/app/services/global';
 export class UsersComponent implements OnInit {
 
     public title: string;
+    public url: string;
     public identity;
     public token;
     public page;
@@ -30,6 +31,7 @@ export class UsersComponent implements OnInit {
     ) {
         this.users = [];
         this.status = '';
+        this.url = GLOBAL.url;
         this.title = 'People';
         this.identity = this._useService.getIdentity();
         this.token = this._useService.getToken();
@@ -43,6 +45,10 @@ export class UsersComponent implements OnInit {
         this._route.params.subscribe(params => {
             let page = + params['page'];
             this.page = page;
+
+            if (!params['page']) {
+                page = 1;
+            }
 
             if (!page) {
                 page = 1;
