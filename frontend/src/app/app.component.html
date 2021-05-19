@@ -42,10 +42,6 @@
             </a>
         </li>
 
-        <li class="avatar">
-
-        </li>
-
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {{identity.name}} <span class="caret"></span>
@@ -73,6 +69,10 @@
                     </a>
                 </li>
             </ul>
+        </li>
+
+        <li class="avatar">
+            <img src="{{ url + 'get-image-user/' + identity.image }}" alt="Profile Image" *ngIf="identity && identity.image" />
         </li>
     </ul>
 </nav>
