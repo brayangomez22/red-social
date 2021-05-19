@@ -240,12 +240,23 @@ function updateUser(req, res) {
             .send({ message: 'you do not have permission to update user data' });
     }
 
-    User.findByIdAndUpdate(userId, update, { new: true }, (err, userUpdated) => {
-        if (err) return res.status(500).send({ message: 'request error' })
+    User.find({
+        $or: [{ email: update.email }, { nick: update.nick }],
+    }).exec((err, users) => {
+        var user_isset = false;
+        users.forEach((user) => {
+            if (user && user._id != userId) user_isset = true;
+        });
 
-        if (!userUpdated) return res.status(404).send({ message: 'the user could not be updated' });
+        if (user_isset) return res.status(404).send({ message: 'the data is already in use' });
 
-        return res.status(200).send({ user: userUpdated });
+        User.findByIdAndUpdate(userId, update, { new: true }, (err, userUpdated) => {
+            if (err) return res.status(500).send({ message: 'request error' })
+
+            if (!userUpdated) return res.status(404).send({ message: 'the user could not be updated' });
+
+            return res.status(200).send({ user: userUpdated });
+        });
     });
 }
 
