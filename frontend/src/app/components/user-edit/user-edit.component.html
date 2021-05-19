@@ -30,9 +30,13 @@
             <input type="email" name="email" id="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
         </p>
 
+        <div *ngIf="user.image">
+            <img src="{{ url + 'get-image-user/' + user.image }}" alt="Profile Image" style="width: 100px; height: 100px; border-radius: 50%">
+        </div>
+
         <p>
             <label for="image">Upload your avatar</label>
-            <input type="file" name="image" id="image" placeholder="Upload image">
+            <input type="file" name="image" id="image" placeholder="Upload image" (change)="fileChangeEvent($event)">
         </p>
 
         <input type="submit" value="{{title}}" class="btn btn-warning" [disabled]="!userEditForm.form.valid" />
