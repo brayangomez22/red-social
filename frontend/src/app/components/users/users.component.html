@@ -4,7 +4,7 @@
     <div class="people">
         <div *ngFor="let user of users" class="item-user">
             <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-body" *ngIf="user._id != identity._id">
                     <div class="image_user pull-left">
                         <a href="#">
                             <img src="{{ url + 'get-image-user/' + user.image }}" alt="Image Profile" *ngIf="user.image" />
@@ -23,13 +23,14 @@
                         </p>
                     </div>
 
-                    <div class="pull-right buttons">
-                        <button class="btn btn-success" *ngIf="follows.indexOf(user._id) < 0">
+                    <div class="pull-right buttons" >
+                        <button class="btn btn-success" *ngIf="follows.indexOf(user._id) < 0" (click)="followUser(user._id)">
                             <i class="fas fa-user-plus"></i>  Follow
                         </button>
 
                         <button class="btn btn-primary" *ngIf="follows.indexOf(user._id) >= 0"
                             (mouseenter)="mouseEnter(user._id)" (mouseleave)="mouseLeave(user._id)"
+                            (click)="unFollowUser(user._id)"
                             [class.btn-danger]="user._id == followUserOver"    
                         >
                             <span *ngIf="user._id == followUserOver; else following">

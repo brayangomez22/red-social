@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
+import { Follow } from 'src/app/models/follow';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { FollowService } from 'src/app/services/follow.service';
 import { GLOBAL } from 'src/app/services/global';
 
 @Component({
     selector: 'app-users',
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss'],
-    providers: [ UserService ]
+    providers: [ UserService, FollowService ]
 })
 export class UsersComponent implements OnInit {
 
@@ -29,7 +31,8 @@ export class UsersComponent implements OnInit {
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
-        private _useService: UserService
+        private _useService: UserService,
+        private _followService: FollowService
     ) {
         this.users = [];
         this.status = '';
@@ -100,5 +103,47 @@ export class UsersComponent implements OnInit {
 
     mouseLeave(user_id) {
         this.followUserOver = 0;
+    }
+
+    followUser(followed) {
+        let follow = new Follow('', this.identity._id, followed);
+
+        this._followService.addFollow(this.token, follow).subscribe(
+            response => {
+                if (!response.follow) {
+                    this.status = 'error';
+                } else {
+                    this.status = 'success';
+                    this.follows.push(followed);
+                }
+            },
+            error => {
+                let errorMessage = <any>error;
+                console.log(errorMessage);
+
+                if (errorMessage != null) {
+                    this.status = 'error';
+                }
+            }
+        );
+    }
+
+    unFollowUser(followed) {
+        this._followService.deleteFollow(this.token, followed).subscribe(
+            response => {
+                let search = this.follows.indexOf(followed);
+                if (search != -1) {
+                    this.follows.splice(search, 1);
+                }
+            },
+            error => {
+                let errorMessage = <any>error;
+                console.log(errorMessage);
+
+                if (errorMessage != null) {
+                    this.status = 'error';
+                }
+            }
+        );
     }
 }

@@ -22,7 +22,7 @@ export class FollowService {
         return this._http.post(this.url + 'follow', params, { headers: headers });
     }
 
-    deleteFollow(id, token): Observable<any> {
+    deleteFollow(token, id): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                     .set('Authorization', token);
                                     
