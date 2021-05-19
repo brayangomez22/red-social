@@ -1,0 +1,78 @@
+.sidebar-32 {
+    width: 32% !important;
+    padding: 0 !important;
+}
+
+#user-card {
+    padding: 25px;
+    width: 32%;
+
+    & .avatar {
+        width: 75px;
+        height: 75px;
+        border-radius: 100px;
+        overflow: hidden;
+        margin-right: 15px;
+
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    } 
+
+    & .name_surname {
+        font-weight: 300;
+        font-size: 17px;
+
+        & a {
+            color: #555;
+        }
+
+        & .nickname {
+            color: #969393;
+        }
+    }
+
+    & .label-stats,
+    & .number-stats {
+        display: block;
+        text-align: center;
+    }
+
+    & .label-stats {
+        font-weight: bold;
+        color: #555;
+    }
+
+    & .number-stats  {
+        font-weight: bold;
+        color: #1b9bff;
+    }
+
+    & .stats {
+        border-top: 2px solid #eee;
+        margin-top: 10px;
+        
+        & a:hover {
+            text-decoration: none;
+        }
+    }
+
+    & .following-data {
+        float: left;
+        padding-left: 18px;
+        padding-right: 18px;
+        margin-top: 10px;
+        border-right: 2px solid #eee;
+
+        &:first-child {
+            padding-left: 6px;
+        }
+
+        &:last-child {
+            border: none;
+        }
+    }
+}
