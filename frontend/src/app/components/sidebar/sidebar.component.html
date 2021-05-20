@@ -43,7 +43,16 @@
 </div>
 
 <div id="new-publication" class="col-lg-4 pull-left panel panel-default"> 
-    <form #newPubForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-10">
+
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        Post successfully submitted
+    </div>
+
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+        post not sent, please try again
+    </div>
+    
+    <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm)" class="col-lg-10">
         <p> 
             <label for="text">What are you thinking today?</label>
             <textarea #text="ngModel" [(ngModel)]="publication.text" name="text" id="text" class="form-control" required></textarea>
