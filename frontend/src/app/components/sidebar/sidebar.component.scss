@@ -3,7 +3,7 @@
     padding: 0 !important;
 }
 
-#user-card {
+#user-card, #new-publication {
     padding: 25px;
     width: 32%;
 
@@ -75,4 +75,9 @@
             border: none;
         }
     }
+}
+
+#new-publication {
+    padding: 18px;
+    padding-left: 8px;
 }

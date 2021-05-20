@@ -41,3 +41,20 @@
         </div>
     </div>
 </div>
+
+<div id="new-publication" class="col-lg-4 pull-left panel panel-default"> 
+    <form #newPubForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-10">
+        <p> 
+            <label for="text">What are you thinking today?</label>
+            <textarea #text="ngModel" [(ngModel)]="publication.text" name="text" id="text" class="form-control" required></textarea>
+            <span *ngIf="!text.valid && text.touched">The text of the publication is mandatory</span>
+        </p>
+
+        <p>
+            <label for="file">Upload your photo</label>
+            <input type="file" name="file" id="file" placeholder="Upload image">
+        </p>
+
+        <input type="submit" value="Send" class="btn btn-success" [disabled]="!newPubForm.form.valid">
+    </form>
+</div>
