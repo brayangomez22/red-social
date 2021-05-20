@@ -52,7 +52,7 @@
         post not sent, please try again
     </div>
     
-    <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm)" class="col-lg-10">
+    <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm); sendPublication($event)" class="col-lg-10">
         <p> 
             <label for="text">What are you thinking today?</label>
             <textarea #text="ngModel" [(ngModel)]="publication.text" name="text" id="text" class="form-control" required></textarea>
