@@ -62,8 +62,6 @@ export class SidebarComponent implements OnInit {
     @Output() sended = new EventEmitter();
 
     sendPublication(event) {
-        console.log(event);
-        
         this.sended.emit({ send: 'true' });
     }
 }
