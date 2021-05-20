@@ -47,6 +47,8 @@ function getPublications(req, res) {
             follows_clean.push(follow.followed);
         });
 
+        follows_clean.push(req.user.sub);
+
         Publication.find({ user: { '$in': follows_clean } }).sort('-created_at').populate('user').paginate(page, itemsPerPage, (err, publications, total) => {
             if (err) return res.status(500).send({ message: 'error returning posts' });
             
@@ -56,6 +58,7 @@ function getPublications(req, res) {
                 total_items: total,
                 pages: Math.ceil(total / itemsPerPage),
                 page: page,
+                items_per_page: itemsPerPage,
                 publications 
             });
         });
