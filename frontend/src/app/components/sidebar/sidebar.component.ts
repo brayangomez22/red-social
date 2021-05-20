@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit {
         this._publicationService.addPublication(this.token, this.publication).subscribe(
             response => {
                 if (response.publication) {
-                    // this.publication = response.publication;
+                    this.publication = response.publication;
                     this.status = 'success';
                     form.reset();
                 } else {
