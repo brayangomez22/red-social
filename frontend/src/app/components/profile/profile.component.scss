@@ -37,4 +37,21 @@
             color: gray;
         }
     }
+
+    & .stats {
+        border-left: 4px solid #ccc;
+        margin-left: 35px;
+        padding-left: 25px;
+        height: 180px;
+
+        & a {
+            font-size: 20px;
+            line-height: 35px;
+            color: #555;
+        }
+    }
+
+    & .publications-user {
+        margin-top: 40px;
+    }
 }
