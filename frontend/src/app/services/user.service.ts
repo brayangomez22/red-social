@@ -102,6 +102,6 @@ export class UserService{
             .set('Content-Type', 'application/json')
             .set('Authorization', this.getToken());
 
-        return this._http.get(this.url + 'user'+id, { headers: headers });
+        return this._http.get(this.url + 'user/'+id, { headers: headers });
     }
 }

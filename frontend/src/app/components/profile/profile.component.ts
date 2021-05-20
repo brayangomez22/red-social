@@ -15,7 +15,7 @@ import { GLOBAL } from 'src/app/services/global';
 export class ProfileComponent implements OnInit {
 
     public title;
-    public user: User;
+    public user!: User;
     public status;
     public identity;
     public token;
@@ -30,13 +30,47 @@ export class ProfileComponent implements OnInit {
         private _followService: FollowService
     ) {
         this.title = 'Profile';
-        this.user = this._userService.getIdentity();
-        this.identity = this.user;
+        this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
         this.url = GLOBAL.url;
     }
 
     ngOnInit(): void {
+        this.loadPage();
     }
 
+    loadPage() {
+        this._route.params.subscribe(params => {
+            let id = params['id'];
+            this.getUser(id);
+            this.getCounters(id);
+        });
+    }
+
+    getUser(id) {
+        this._userService.getUser(id).subscribe(
+            response => {
+                if (response.user) {
+                    this.user = response.user;
+                } else {
+                    this.status = 'error';
+                }
+            },
+            error => {
+                console.log(<any>error);
+                this._router.navigate(['/profile', this.identity._id]);
+            }
+        );
+    }
+
+    getCounters(id) {
+        this._userService.getCounters(id).subscribe(
+            response => {
+                this.stats = response;
+            }, 
+            error => {
+                console.log(<any>error);
+            }
+        );
+    }
 }
