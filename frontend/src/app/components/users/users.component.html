@@ -14,11 +14,11 @@
 
                     <div class="user_name pull-left">
                         <p class="name_surname">
-                            <a href="#">
+                            <a [routerLink]="['/profile', user._id]">
                                 {{ user.name + ' ' + user.surname }}
                             </a>
                         </p>
-                        <p class="nickname">
+                        <p class="nickname"> 
                             {{ user.nick }}
                         </p>
                     </div>

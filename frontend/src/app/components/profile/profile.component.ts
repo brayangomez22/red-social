@@ -21,7 +21,10 @@ export class ProfileComponent implements OnInit {
     public token;
     public stats;
     public url; 
-    public follow;
+    public followed;
+    public following;
+    public followUserOver;
+
 
     constructor(
         private _route: ActivatedRoute,
@@ -33,6 +36,8 @@ export class ProfileComponent implements OnInit {
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
         this.url = GLOBAL.url;
+        this.followed = false;
+        this.following = false;
     }
 
     ngOnInit(): void {
@@ -52,6 +57,18 @@ export class ProfileComponent implements OnInit {
             response => {
                 if (response.user) {
                     this.user = response.user;
+
+                    if (response.following && response.following._id) {
+                        this.following = true;
+                    } else {
+                        this.following = false;
+                    }
+
+                    if (response.followed && response.followed._id) {
+                        this.followed = true;
+                    } else {
+                        this.followed = false;
+                    }
                 } else {
                     this.status = 'error';
                 }
@@ -72,5 +89,37 @@ export class ProfileComponent implements OnInit {
                 console.log(<any>error);
             }
         );
+    }
+
+    followUser(followed) {
+        let follow = new Follow('', this.identity._id, followed);
+
+        this._followService.addFollow(this.token, follow).subscribe(
+            response => {
+                this.following = true;
+            },
+            error => {
+                console.log(<any>error);
+            }
+        );
+    }
+
+    unFollowUser(followed) {
+        this._followService.deleteFollow(this.token, followed).subscribe(
+            response => {
+                this.following = false;
+            },
+            error => {
+                console.log(<any>error);
+            }
+        );
+    }
+
+    mouseEnter(user_id) {
+        this.followUserOver = user_id;
+    }
+
+    mouseLeave(user_id) {
+        this.followUserOver = 0;
     }
 }
