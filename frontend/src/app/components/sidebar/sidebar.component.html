@@ -20,7 +20,7 @@
 
     <div class="stats" *ngIf="stats">
         <div class="following-data">
-            <a href="#">
+            <a [routerLink]="['/following', identity._id,1]">
                 <span class="label-stats">Following  </span>
                 <span class="number-stats">{{ stats.following }}</span>
             </a>
