@@ -11,6 +11,10 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+button, button:focus {
+    outline: none !important;
+}
+
 .h1-strong {
     font-size: 35px;
     font-weight: bold;

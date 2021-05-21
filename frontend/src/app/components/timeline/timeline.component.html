@@ -27,7 +27,42 @@
                         {{ publication.text }}
                     </h4>
 
-                    <div class="col-lg-12" *ngIf="publication.file != 'null'">
+                    <div class="pull-right" *ngIf="publication.user._id == identity._id">            
+                        &nbsp;
+                        <button type="button" class="btn btn-danger" data-toggle="modal" 
+                                [attr.data-target]="'#modalDelete' + publication._id" *ngIf="showImage != publication._id"
+                        >
+                            <i class="fas fa-trash"></i>
+                        </button>
+
+                        <div class="modal fade" id="modalDelete{{publication._id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title" id="modalLabel">
+                                            Are you sure you want to delete the post?
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        If you delete it, you will not be able to recover the publication
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-danger"
+                                            (click)="deletePublication(publication._id)" data-dismiss="modal"
+                                        >
+                                            Delete the post
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pull-right" *ngIf="publication.file != 'null'">
                         <button class="btn btn-warning pull-right" (click)="showThisImage(publication._id)"
                                 *ngIf="showImage != publication._id"
                         >
@@ -42,6 +77,7 @@
                     </div>
 
                     <div class="col-lg-12" *ngIf="publication.file != 'null' && showImage == publication._id">
+                        <br>
                         <img class="col-lg-12"  src="{{ url + 'get-image-publication/' + publication.file }}" alt="Image Profile"  />
                     </div>
                 </div>

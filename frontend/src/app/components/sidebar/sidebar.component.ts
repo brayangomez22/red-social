@@ -40,20 +40,28 @@ export class SidebarComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    onSubmit(form) {
+    @Output() sended = new EventEmitter();
+
+    onSubmit(form, $event) {
         this._publicationService.addPublication(this.token, this.publication).subscribe(
             response => {
                 if (response.publication) {
-                    this.publication = response.publication;
-                    
-                    this._uploadService.makeFileRequest(
-                        this.url + 'upload-image-publication/' + this.publication._id, [], this.filesToUpload, this.token, 'image'
-                    ).then((result: any) => {
-                        this.publication.file = result.image;
+                    if (this.filesToUpload && this.filesToUpload.length) {
+                        this._uploadService.makeFileRequest(
+                            this.url + 'upload-image-publication/' + response.publication._id, [], this.filesToUpload, this.token, 'image'
+                        ).then((result: any) => {
+                            this.publication.file = result.image;
+                            this.status = 'success';
+                            form.reset();
+                            this._router.navigate(['/timeline']); 
+                            this.sended.emit({ send: 'true' });
+                        });
+                    } else {
                         this.status = 'success';
                         form.reset();
                         this._router.navigate(['/timeline']);
-                    });
+                        this.sended.emit({ send: 'true' });
+                    }
                 } else {
                     this.status = 'error';
                 }
@@ -67,12 +75,6 @@ export class SidebarComponent implements OnInit {
                 }
             }
         );
-    }
-
-    @Output() sended = new EventEmitter();
-
-    sendPublication(event) {
-        this.sended.emit({ send: 'true' });
     }
 
     fileChangeEvent(fileInput: any) {
