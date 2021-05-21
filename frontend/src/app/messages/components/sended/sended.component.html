@@ -1,3 +1,48 @@
-<div class="col-lg-8">
+<div class="col-lg-12">
     <h3>{{ title }}</h3>
+
+    <div class="people" *ngIf="messages">
+        <div *ngFor="let message of messages" class="item-user">
+            <div class="panel panel-default">
+                <div class="panel-body" >
+                    <div class="image_user pull-left">
+                        <a href="#">
+                            <img src="{{ url + 'get-image-user/' + message.emitter.image }}" alt="Image Profile" *ngIf="message.emitter.image" />
+                            <img src="assets/user.png" alt="Image Profile" *ngIf="!message.emitter.image" />
+                        </a>
+                    </div>
+
+                    <div class="user_name pull-left">
+                        <p class="name_surname">
+                            <a [routerLink]="['/profile', message.emitter._id]">
+                                {{ message.emitter.name + ' ' + message.emitter.surname }}
+                            </a>
+                            &nbsp; | &nbsp; 
+                            <span class="nickname"> 
+                                {{ message.emitter.nick }}
+                            </span>
+                            &nbsp; | &nbsp; 
+                            <span class="data">
+                                {{ (message.created_at | amFromUnix) | amTimeAgo }}
+                            </span>
+                            &nbsp; | &nbsp; 
+                            <span >
+                                Sent to <a [routerLink]="['/profile', message.receiver._id]">
+                                    {{ message.receiver.name + ' ' + message.receiver.surname}}
+                                </a>
+                            </span>
+                        </p>
+                        <p>
+                            {{ message.text }} 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul class="pagination pull-right">
+            <li *ngIf="page > 1"><a [routerLink]="['/messages/sent', prev_page]">Prev</a></li>
+            <li *ngIf="pages != page"><a [routerLink]="['/messages/sent', next_page]">Next</a></li>
+        </ul>
+    </div>
 </div>

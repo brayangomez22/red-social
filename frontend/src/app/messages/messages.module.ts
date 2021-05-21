@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { MomentModule } from 'ngx-moment';
 
 import { MessagesRoutingModule } from './messages-routing.module';
 
@@ -19,7 +20,8 @@ import { SendedComponent } from './components/sended/sended.component';
     imports: [
         BrowserModule,
         FormsModule,
-        MessagesRoutingModule
+        MessagesRoutingModule,
+        MomentModule
     ],
     exports: [
         MainComponent,

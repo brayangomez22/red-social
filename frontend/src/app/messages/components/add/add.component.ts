@@ -35,7 +35,7 @@ export class AddComponent implements OnInit {
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
         this.url = GLOBAL.url;
-        this.message = new Message('', '', '', '', this.identity._id, ''); 
+        this.message = new Message('', '', '', '', this.identity._id, this.identity._id); 
     }
 
     ngOnInit(): void {
@@ -60,7 +60,9 @@ export class AddComponent implements OnInit {
     getMyFollows() {
         this._followService.getMyFollows(this.token).subscribe(
             response => {
-                this.follows = response.follows;
+                if (response.follows) {
+                    this.follows = response.follows;
+                } 
             },  
             error => {
                 console.log(<any>error);
