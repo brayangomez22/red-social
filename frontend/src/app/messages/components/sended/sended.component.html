@@ -3,7 +3,7 @@
 
     <div class="people" *ngIf="messages">
         <div *ngFor="let message of messages" class="item-user">
-            <div class="panel panel-default">
+            <div class="panel panel-default" *ngIf="message.emitter">
                 <div class="panel-body" >
                     <div class="image_user pull-left">
                         <a href="#">
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <ul class="pagination pull-right">
+        <ul class="pagination pull-right0" >
             <li *ngIf="page > 1"><a [routerLink]="['/messages/sent', prev_page]">Prev</a></li>
             <li *ngIf="pages != page"><a [routerLink]="['/messages/sent', next_page]">Next</a></li>
         </ul>

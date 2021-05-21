@@ -41,6 +41,7 @@ function getReceivedMessages(req, res) {
 
     Message.find({ receiver: userId })
         .populate('emitter', 'name surname image nick _id')
+        .sort('-created_at')
         .paginate(page, itemsPerPage, (err, messages, total) => {
             if (err) return res.status(500).send({ message: 'request error' });
 
@@ -66,6 +67,7 @@ function getEmitterMessages(req, res) {
 
     Message.find({ emitter: userId })
         .populate('emitter receiver', 'name surname image nick _id')
+        .sort('-created_at')
         .paginate(page, itemsPerPage, (err, messages, total) => {
             if (err) return res.status(500).send({ message: 'request error' });
 
