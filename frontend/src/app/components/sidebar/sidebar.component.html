@@ -27,14 +27,14 @@
         </div>
 
         <div class="following-data">
-            <a href="#">
+            <a [routerLink]="['/followed', identity._id,1]">
                 <span class="label-stats">Followers  </span>
                 <span class="number-stats">{{ stats.followed }}</span>
             </a>
         </div>
 
         <div class="following-data">
-            <a href="#">
+            <a [routerLink]="['/profile', identity._id]">
                 <span class="label-stats">Publications  </span>
                 <span class="number-stats">{{ stats.publications }}</span>
             </a>

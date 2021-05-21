@@ -7,12 +7,12 @@ import { FollowService } from 'src/app/services/follow.service';
 import { GLOBAL } from 'src/app/services/global';
 
 @Component({
-    selector: 'app-following',
-    templateUrl: './following.component.html',
-    styleUrls: ['./following.component.scss'],
+    selector: 'app-followed',
+    templateUrl: './followed.component.html',
+    styleUrls: ['./followed.component.scss'],
     providers: [ UserService, FollowService ]
 })
-export class FollowingComponent implements OnInit {
+export class FollowedComponent implements OnInit {
 
     public title: string;
     public url: string;
@@ -26,7 +26,7 @@ export class FollowingComponent implements OnInit {
     public users: User[];
     public follows;
     public status: string;
-    public following;
+    public followed;
     public followUserOver;
     public userPageId;
     public user!: User;
@@ -40,7 +40,7 @@ export class FollowingComponent implements OnInit {
         this.users = [];
         this.status = '';
         this.url = GLOBAL.url;
-        this.title = 'Users followed by';
+        this.title = 'followers';
         this.identity = this._useService.getIdentity();
         this.token = this._useService.getToken();
     }
@@ -77,13 +77,16 @@ export class FollowingComponent implements OnInit {
     }
 
     getFollows(user_id, page) {
-        this._followService.getFollowing(this.token, user_id, page).subscribe(
+        this._followService.getFollowed(this.token, user_id, page).subscribe(
             response => {
                 if (!response.follows) {
                     this.status = 'error';
                 } else {
+                    console.log(response);
+                    
+
                     this.total = response.total;
-                    this.following = response.follows;
+                    this.followed = response.follows;
                     this.pages = response.pages;
                     this.follows = response.users_following;
 

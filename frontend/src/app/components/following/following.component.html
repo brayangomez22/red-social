@@ -4,7 +4,7 @@
     <div class="people" *ngIf="following">
         <div *ngFor="let follow of following" class="item-user">
             <div class="panel panel-default">
-                <div class="panel-body" *ngIf="follow.followed._id != identity._id">
+                <div class="panel-body" >
                     <div class="image_user pull-left">
                         <a href="#">
                             <img src="{{ url + 'get-image-user/' + follow.followed.image }}" alt="Image Profile" *ngIf="follow.followed.image" />
@@ -23,7 +23,7 @@
                         </p>
                     </div>
 
-                    <div class="pull-right buttons" >
+                    <div class="pull-right buttons" *ngIf="follow.followed._id != identity._id">
                         <button class="btn btn-success" *ngIf="follows.indexOf(follow.followed._id) < 0" (click)="followUser(follow.followed._id)">
                             <i class="fas fa-user-plus"></i>  Follow
                         </button>

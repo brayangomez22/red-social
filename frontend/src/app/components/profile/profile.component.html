@@ -50,7 +50,7 @@
             </div>
 
             <div class="following-data">
-                <a href="#">
+                <a [routerLink]="['/followed', user._id,1]">
                     <span class="label-stats">Followers  </span>
                     <span class="number-stats">{{ stats.followed }}</span>
                 </a>
