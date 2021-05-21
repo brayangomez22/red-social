@@ -9,7 +9,7 @@
     </div>
 
     <div class="name_surname pull-left">
-        <a href="#" class="username">
+        <a [routerLink]="['/profile', identity._id]" class="username">
             {{ identity.name + ' ' + identity.surname }}
         </a>
         <p class="nickname">{{ identity.nick }}</p>
@@ -61,7 +61,7 @@
 
         <p>
             <label for="file">Upload your photo</label>
-            <input type="file" name="file" id="file" placeholder="Upload image">
+            <input type="file" name="file" id="file" placeholder="Upload image" (change)="fileChangeEvent($event)">
         </p>
 
         <input type="submit" value="Send" class="btn btn-success" [disabled]="!newPubForm.form.valid">

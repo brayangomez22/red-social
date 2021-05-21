@@ -38,6 +38,9 @@ export class ProfileComponent implements OnInit {
         this.url = GLOBAL.url;
         this.followed = false;
         this.following = false;
+        this._router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false;
+        };
     }
 
     ngOnInit(): void {

@@ -14,9 +14,9 @@
                     </div>
                     
                     <div>
-                        <span class="username">
+                        <a [routerLink]="['/profile', publication.user._id]" class="username">
                             {{ publication.user.name  + ' ' + publication.user.surname }}
-                        </span>
+                        </a>
                         &nbsp; | &nbsp; 
                         <span class="data">
                             {{ (publication.created_at | amFromUnix) | amTimeAgo }}
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="col-lg-12 text-center">
+    <div class="col-lg-12 text-center" *ngIf="publications && publications.length">
         <p><button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">See more posts</button></p>
     </div>   
 </div>    

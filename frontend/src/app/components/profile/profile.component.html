@@ -19,7 +19,7 @@
             </div>
             <div class="clearfix"></div>
 
-            <div class="follow-pull-left">
+            <div class="follow-pull-left" *ngIf="user._id != identity._id">
                 <button class="btn btn-success" *ngIf="!following" (click)="followUser(user._id)">
                     Follow                    
                 </button>
