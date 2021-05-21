@@ -2,22 +2,22 @@
     <h3>{{title}}</h3>
     <div class="sidebar-admin">
         <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
-            <li role="presentation">
-                <a href="#">Send Messages</a>
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['send']">Send Messages</a>
+            </li>
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['received']">Received Messages</a>
+            </li>
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['sent']">Sent Messages</a>
             </li>
             <li role="presentation">
-                <a href="#">Received Messages</a>
-            </li>
-            <li role="presentation">
-                <a href="#">Sent Messages</a>
-            </li>
-            <li role="presentation">
-                <a href="#">Information</a>
+                <a [routerLink]="['/home']">Information</a>
             </li>
         </ul>
     </div>
 </div>
 
 <div class="col-lg-8">
-    
+    <router-outlet></router-outlet>
 </div>

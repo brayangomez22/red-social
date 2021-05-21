@@ -18,10 +18,8 @@ import { PublicationsComponent } from './components/publications/publications.co
 import { ProfileComponent } from './components/profile/profile.component';
 import { FollowingComponent } from './components/following/following.component';
 import { FollowedComponent } from './components/followed/followed.component';
-import { MainComponent } from './messages/components/main/main.component';
-import { AddComponent } from './messages/components/add/add.component';
-import { ReceivedComponent } from './messages/components/received/received.component';
-import { SendedComponent } from './messages/components/sended/sended.component';
+
+import { MessagesModule } from './messages/messages.module';
 
 @NgModule({
     declarations: [
@@ -36,18 +34,15 @@ import { SendedComponent } from './messages/components/sended/sended.component';
         PublicationsComponent,
         ProfileComponent,
         FollowingComponent,
-        FollowedComponent,
-        MainComponent,
-        AddComponent,
-        ReceivedComponent,
-        SendedComponent
+        FollowedComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
         routing,
-        MomentModule
+        MomentModule,
+        MessagesModule
     ],
     providers: [
         appRoutingProviders
