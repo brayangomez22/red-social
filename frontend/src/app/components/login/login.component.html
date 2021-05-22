@@ -1,6 +1,4 @@
-<div class="col-lg-5">
-    <h1 class="h1-strong">{{title}}</h1>
-
+<section class="login-container">
     <div class="alert alert-success" *ngIf="status == 'success'">
         You have successfully logged in, welcome!!!
     </div>
@@ -9,19 +7,16 @@
         You could not identify yourself correctly, try again! !!
     </div>
 
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
-        <p>
-            <label for="email">Email *</label>
-            <input type="email" name="email" id="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+	<div class="login-inputs">
+        <h1>Login</h1>
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit()">      
+            <input type="email" name="email" id="email" placeholder="Example@gmail.com" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
             <span *ngIf="!email.valid && email.touched">Email is required!!!</span>
-        </p>
 
-        <p>
-            <label for="password">Password *</label>
-            <input type="password" name="password" id="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required>
+            <input type="password" name="password" id="password" placeholder="Password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required>
             <span *ngIf="!password.valid && password.touched">The password is mandatory!!!</span>
-        </p>
-
-        <input type="submit" value="{{title}}" class="btn btn-success" [disabled]="!loginForm.form.valid" />
-    </form>
-</div>
+            
+            <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">{{title}}</button>
+        </form>
+	</div>
+</section>

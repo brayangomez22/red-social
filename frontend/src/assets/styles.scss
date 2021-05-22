@@ -8,7 +8,35 @@
 }
 
 body {
+    position: relative;
+    min-height: 100vh;
+    height: 100%;
     font-family: 'Poppins', sans-serif;
+    background: url(../assets/bg.png);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-track{
+    width: 10px;
+    background: #23243c;
+    border-left: 0 solid white;
+    border-right: 0 solid white;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #1b9bff;
+    background-image: linear-gradient(315deg, #1b9bff 0%, #3eadcf 74%);
+    width: 0;
+    height: 15%;
+    transition: 0.5s ease;
+    cursor: pointer;
 }
 
 button, button:focus {
@@ -24,7 +52,8 @@ button, button:focus {
 }
 
 nav{
-    background: #0082e6;
+    background-color: #23243c;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.2);
     height: 80px;
     width: 100%;
     display: flex;
@@ -150,4 +179,85 @@ nav{
 
 .people {
     min-height: 500px;
+}
+
+.login-container{
+	position: relative;
+    height: 100vh;
+
+    & .login-inputs{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: calc(100% - 80px);
+        
+        & h1{
+            color: #fff;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            margin:10px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 30px rgba(0,0,0,0.2);
+            font-weight: bold;
+        }
+
+        & form{
+            background-color: #23243c;
+            box-shadow: 2px 2px 30px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            & p {
+                position: relative;
+                width: 100%;
+            }
+
+            & input{
+                margin:10px;
+                width:300px;
+                height: 35px;
+                background-color: #434459;
+                border-radius: 7px;
+                border: none;
+                outline: none;
+                color:#fff;
+                padding:5px 10px;
+
+                &::placeholder{
+                    color:#727383;
+                }
+            }
+
+            & span {
+                color:#fff;
+                text-align: right;
+            }
+
+            & button{
+                text-transform: uppercase;
+                width:110px;
+                height: 35px;
+                border-radius: 20px;
+                border: none;
+                outline: none;
+                margin:5px;
+                font-weight:600;
+                background-color:#3b70e0;
+                color:#fff;
+                font-size:12px;
+                font-family: poppins;
+                letter-spacing: 1px;
+
+                &:hover{
+                    background-color: #1b9bff;
+                    transition: all ease 0.3s;
+                }
+            }
+        }
+    }
 }

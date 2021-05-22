@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, DoCheck {
         private _router: Router,
         private _useService: UserService
     ) {
-        this.title = 'NGSOCIAL';
+        this.title = 'SOFKASOCIAL';
         this.url = GLOBAL.url;
     }
 

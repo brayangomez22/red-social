@@ -1,6 +1,4 @@
-<div class="col-lg-5">
-    <h1 class="h1-strong">{{title}}</h1>
-
+<section class="login-container">
     <div class="alert alert-success" *ngIf="status == 'success'">
         Registration completed successfully,  
         <a [routerLink]="['/login']">
@@ -12,37 +10,25 @@
         The registration could not be completed, maybe your email or nickname is already in use, try again with other data
     </div>
 
-    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-lg-12">
-        <p>
-            <label for="name">Name *</label>
-            <input type="text" name="name" id="name" #name="ngModel" [(ngModel)]="user.name" class="form-control" required>
+	<div class="login-inputs">
+        <h1>{{title}}</h1>
+        <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+            <input type="text" name="name" id="name" placeholder="name" #name="ngModel" [(ngModel)]="user.name" class="form-control" required>
             <span *ngIf="!name.valid && name.touched">The name is required!!!</span>
-        </p>
-
-        <p>
-            <label for="surname">Surnames *</label>
-            <input type="text" name="surname" id="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" required>
+        
+            <input type="text" name="surname" id="surname" placeholder="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" required>
             <span *ngIf="!surname.valid && surname.touched">Last names are required!!!</span>
-        </p>
 
-        <p>
-            <label for="nick">Nickname *</label>
-            <input type="text" name="nick" id="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" required>
+            <input type="text" name="nick" id="nick" placeholder="nickname" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" required>
             <span *ngIf="!nick.valid && nick.touched">The nickname is required!!!</span>
-        </p>
 
-        <p>
-            <label for="email">Email *</label>
-            <input type="email" name="email" id="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <input type="email" name="email" id="email" placeholder="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
             <span *ngIf="!email.valid && email.touched">Email is required!!!</span>
-        </p>
 
-        <p>
-            <label for="password">Password *</label>
-            <input type="password" name="password" id="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required>
+            <input type="password" name="password" id="password" placeholder="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required>
             <span *ngIf="!password.valid && password.touched">The password is mandatory!!!</span>
-        </p>
-
-        <input type="submit" value="{{title}}" class="btn btn-success" [disabled]="!registerForm.form.valid" />
-    </form>
-</div>
+        
+            <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">{{title}}</button>
+        </form>
+	</div>
+</section>
