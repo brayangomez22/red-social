@@ -1,6 +1,4 @@
-<div class="col-lg-5">
-    <h1 class="h1-strong">{{title}}</h1>
-
+<section class="login-container">
     <div class="alert alert-success" *ngIf="status == 'success'">
         Your details have been updated correctly
     </div>
@@ -9,36 +7,19 @@
         Your data could not be updated
     </div>
 
-    <form #userEditForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
-        <p>
-            <label for="name">Name *</label>
-            <input type="text" name="name" id="name" #name="ngModel" [(ngModel)]="user.name" class="form-control" required>
-        </p>
-
-        <p>
-            <label for="surname">Surnames *</label>
-            <input type="text" name="surname" id="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" required>
-        </p>
-
-        <p>
-            <label for="nick">Nickname *</label>
-            <input type="text" name="nick" id="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" required>
-        </p>
-
-        <p>
-            <label for="email">Email *</label>
-            <input type="email" name="email" id="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-        </p>
-
-        <div *ngIf="user.image">
-            <img src="{{ url + 'get-image-user/' + user.image }}" alt="Profile Image" style="width: 100px; height: 100px; border-radius: 50%">
-        </div>
-
-        <p>
-            <label for="image">Upload your avatar</label>
+    <div class="login-inputs">
+        <h1>{{title}}</h1>
+        <form #userEditForm="ngForm" (ngSubmit)="onSubmit()">
+            <input type="text" name="name" id="name" placeholder="Name *" #name="ngModel" [(ngModel)]="user.name" class="form-control" required>
+            <input type="text" name="surname" id="surname" placeholder="Surnames *" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" required>
+            <input type="text" name="nick" id="nick" placeholder="Nickname *" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" required>
+            <input type="email" name="email" id="email" placeholder="Email *" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <div *ngIf="user.image">
+                <img src="{{ url + 'get-image-user/' + user.image }}" alt="Profile Image" style="width: 100px; height: 100px; border-radius: 50%">
+            </div>
             <input type="file" name="image" id="image" placeholder="Upload image" (change)="fileChangeEvent($event)">
-        </p>
 
-        <input type="submit" value="{{title}}" class="btn btn-warning" [disabled]="!userEditForm.form.valid" />
-    </form>
-</div>
+            <button type="submit" value="{{title}}" class="btn-sofka" [disabled]="!userEditForm.form.valid">{{title}}</button>
+        </form>
+	</div>
+</section>

@@ -28,18 +28,18 @@
         & .name {
             font-size: 24px;
             font-weight: bold;
-            color: #555;
+            color: #fff;
         }
 
         & .nick {
             font-size: 24px;
             font-weight: normal;
-            color: gray;
+            color: #fff;
         }
     }
 
     & .stats {
-        border-left: 4px solid #ccc;
+        border-left: 4px solid #fff;
         margin-left: 35px;
         padding-left: 25px;
         height: 180px;
@@ -47,7 +47,7 @@
         & a {
             font-size: 20px;
             line-height: 35px;
-            color: #555;
+            color: #fff;
         }
     }
 

@@ -1,4 +1,11 @@
 .item-user {
+    
+    & .panel {
+        background-color: #23243c !important;
+        box-shadow: 2px 2px 30px rgba(0,0,0,0.2);
+        border: none !important;
+    }
+
     & .image_user {
         width: 75px;
         height: 75px;
@@ -18,11 +25,11 @@
         margin-top: 10px;
 
         & .nickname {
-            color: #969393;
+            color: #fff;
         }
 
         & .name_surname a{
-            color: #555;
+            color: rgb(247, 242, 242);
             font-weight: bold;
         }
     }

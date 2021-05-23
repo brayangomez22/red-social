@@ -8,7 +8,7 @@
     </div>
 
 	<div class="login-inputs">
-        <h1>Login</h1>
+        <h1>{{title}}</h1>
         <form #loginForm="ngForm" (ngSubmit)="onSubmit()">      
             <input type="email" name="email" id="email" placeholder="Example@gmail.com" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
             <span *ngIf="!email.valid && email.touched">Email is required!!!</span>
@@ -16,7 +16,7 @@
             <input type="password" name="password" id="password" placeholder="Password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required>
             <span *ngIf="!password.valid && password.touched">The password is mandatory!!!</span>
             
-            <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">{{title}}</button>
+            <button type="submit" class="btn-sofka" [disabled]="!loginForm.form.valid">{{title}}</button>
         </form>
 	</div>
 </section>

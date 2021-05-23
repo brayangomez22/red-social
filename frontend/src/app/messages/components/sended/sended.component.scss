@@ -1,4 +1,12 @@
 .item-user {
+    color: #fff;
+
+    & .panel {
+        background-color: #23243c !important;
+        box-shadow: 2px 2px 30px rgba(0,0,0,0.2);
+        border: none !important;
+    }
+
     & .image_user {
         width: 75px;
         height: 75px;
