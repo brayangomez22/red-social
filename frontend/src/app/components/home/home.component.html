@@ -1,17 +1,20 @@
-<div class="col-lg-8 col-lg-offset-2">
-    <div class="jumbotron">
-        <h1 >{{title}}</h1>
-        <p>Enjoy your friends' posts and share your life</p>
-        <p>
-            <a href="#" class="btn btn-success btn-lg" role="button">
-                My Profile
-            </a>
-            <a [routerLink]="['/timeline']" class="btn btn-primary btn-lg" role="button">
-                Timeline
-            </a>
-            <a [routerLink]="['/people']" class="btn btn-default btn-lg" role="button">
-                People
-            </a>
+<section class="home">
+    <div class="container-home">
+        <div class="content-home">
+            <h2>Welcome</h2>
+            <p>“If you share your bread, you will like it more. If you share your happiness then it will increase. " "We must find someone to eat and drink with before looking for something to eat and drink, for eating alone is leading the life of a lion or a wolf." "Here's one of the things that love is: sharing our joy with people."</p>
+            <a [routerLink]="['/timeline']">Start</a>
+        </div>
+        <div class="imgBx-home">
+            <img src="../../../assets/astronaut2.png" alt="">
+        </div>
+        <ul class="sci">
+            <li><a href="#"><img src="../../../assets/twitter.png" alt="twitter"></a></li>
+            <li><a href="#"><img src="../../../assets/facebook.png" alt="facebook"></a></li>
+            <li><a href="#"><img src="../../../assets/instagram.png" alt="instagram"></a></li>
+        </ul>
+        <p class="copyright">
+            Copyright &copy; 2021 SOFKASOCIAL. All rights reserved.
         </p>
     </div>
-</div>
+</section>
