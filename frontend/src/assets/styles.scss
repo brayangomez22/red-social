@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
 
 * {
-    margin: o;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
@@ -48,19 +48,20 @@ button, button:focus {
     font-weight: bold;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
     color: #fff;
 }
 
 nav{
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     height: 80px;
-    width: 90%;
+    width: 100%;
     margin: auto;
-    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -196,6 +197,11 @@ nav{
     }
 }
 
+.container-page {
+    margin-top: 120px !important;
+    padding: 0 30px;
+}
+
 .people {
     min-height: 500px;
 }
@@ -209,7 +215,7 @@ nav{
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        height: calc(100% - 80px);
+        height: 100%;
         
         & h1{
             color: #fff;
@@ -395,4 +401,47 @@ button.btn-sofka{
 		box-shadow: 0 0 15px 1px #1b9bff, 0 0 2px rgba(41, 230, 255, 0.7), 0 0 2px rgba(41, 212, 255, 0.5), 0 0 2px rgba(41, 194, 255, 0.3), 0 0 1px rgba(41, 205, 255, 0.25);
 		animation-timing-function: ease-in;
 	}
+}
+
+
+#noPublications {
+    width: 100%;
+    padding: 40px;
+    background-color: #23243c !important;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.2);
+    color: #fff;
+    border-radius: 7px;
+    text-align: center;
+
+    & .ohhh {
+        display: flex;
+        justify-content: center;
+
+        & img.asteroid {
+            height: 30px;
+            animation: animate2 3s linear infinite;
+        }
+    
+        & img.asteroid1 {
+            padding-right: 17px;
+        }
+    
+        & img.asteroid2 {
+            padding-left: 17px;
+        }
+    }
+
+}
+
+.noPublicationsTimeLine {
+    min-height: 220px;
+}
+
+@keyframes animate2 {
+    0%, 100% {
+        transform: translateY(10px);
+    }
+    50% {
+        transform: translateY(20px);
+    }
 }

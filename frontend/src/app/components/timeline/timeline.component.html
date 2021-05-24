@@ -1,95 +1,111 @@
-<div class="col-lg-8">
-    <h1 class="h1-strong">{{title}}</h1>
-    <button class="btn btn-success btn-sm pull-right" (click)="refresh($event)">Show new posts</button>
-
-    <div id="publications">
-        <div *ngFor="let publication of publications" class="item-publication">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="image_user pull-left">
-                        <a href="#">
-                            <img src="{{ url + 'get-image-user/' + publication.user.image }}" alt="Image Profile" *ngIf="publication.user.image" />
-                            <img src="assets/user.png" alt="Image Profile" *ngIf="!publication.user.image" />
-                        </a>
-                    </div>
-                    
-                    <div>
-                        <a [routerLink]="['/profile', publication.user._id]" class="username">
-                            {{ publication.user.name  + ' ' + publication.user.surname }}
-                        </a>
-                        &nbsp; | &nbsp; 
-                        <span class="data">
-                            {{ (publication.created_at | amFromUnix) | amTimeAgo }}
-                        </span>
-                    </div>
-
-                    <h4 class="publication-text pull-left">
-                        {{ publication.text }}
-                    </h4>
-
-                    <div class="pull-right" *ngIf="publication.user._id == identity._id">            
-                        &nbsp;
-                        <button type="button" class="btn btn-danger" data-toggle="modal" 
-                                [attr.data-target]="'#modalDelete' + publication._id" *ngIf="showImage != publication._id"
-                        >
-                            <i class="fas fa-trash"></i>
-                        </button>
-
-                        <div class="modal fade" id="modalDelete{{publication._id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h4 class="modal-title" id="modalLabel">
-                                            Are you sure you want to delete the post?
-                                        </h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        If you delete it, you will not be able to recover the publication
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger"
-                                            (click)="deletePublication(publication._id)" data-dismiss="modal"
-                                        >
-                                            Delete the post
-                                        </button>
+<div class="container-page">
+    <div class="col-lg-8" >
+        <h1 class="h1-strong">{{title}}</h1>
+        <button 
+            class="btn btn-success btn-sm pull-right" (click)="refresh($event)"
+            *ngIf="publications && publications.length != 0"
+        >
+            Show new posts
+        </button>
+    
+        <div id="publications" *ngIf="publications && publications.length != 0">
+            <div *ngFor="let publication of publications" class="item-publication">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="image_user pull-left">
+                            <a href="#">
+                                <img src="{{ url + 'get-image-user/' + publication.user.image }}" alt="Image Profile" *ngIf="publication.user.image" />
+                                <img src="assets/user.png" alt="Image Profile" *ngIf="!publication.user.image" />
+                            </a>
+                        </div>
+                        
+                        <div>
+                            <a [routerLink]="['/profile', publication.user._id]" class="username">
+                                {{ publication.user.name  + ' ' + publication.user.surname }}
+                            </a>
+                            &nbsp; | &nbsp; 
+                            <span class="data">
+                                {{ (publication.created_at | amFromUnix) | amTimeAgo }}
+                            </span>
+                        </div>
+    
+                        <h4 class="publication-text pull-left">
+                            {{ publication.text }}
+                        </h4>
+    
+                        <div class="pull-right" *ngIf="publication.user._id == identity._id">            
+                            &nbsp;
+                            <button type="button" class="btn btn-danger" data-toggle="modal" 
+                                    [attr.data-target]="'#modalDelete' + publication._id" *ngIf="showImage != publication._id"
+                            >
+                                <i class="fas fa-trash"></i>
+                            </button>
+    
+                            <div class="modal fade" id="modalDelete{{publication._id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="modalLabel">
+                                                Are you sure you want to delete the post?
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            If you delete it, you will not be able to recover the publication
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="deletePublication(publication._id)" data-dismiss="modal"
+                                            >
+                                                Delete the post
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="pull-right" *ngIf="publication.file != 'null'">
-                        <button class="btn btn-warning pull-right" (click)="showThisImage(publication._id)"
-                                *ngIf="showImage != publication._id"
-                        >
-                            <i class="fas fa-images"></i>
-                        </button>
-
-                        <button class="btn btn-danger pull-right" (click)="hideThisImage(publication._id)"
-                                *ngIf="showImage == publication._id"
-                        >
-                            <i class="fas fa-window-close"></i>
-                        </button>
-                    </div>
-
-                    <div class="col-lg-12" *ngIf="publication.file != 'null' && showImage == publication._id">
-                        <br>
-                        <img class="col-lg-12"  src="{{ url + 'get-image-publication/' + publication.file }}" alt="Image Profile"  />
+    
+                        <div class="pull-right" *ngIf="publication.file != 'null'">
+                            <button class="btn btn-warning pull-right" (click)="showThisImage(publication._id)"
+                                    *ngIf="showImage != publication._id"
+                            >
+                                <i class="fas fa-images"></i>
+                            </button>
+    
+                            <button class="btn btn-danger pull-right" (click)="hideThisImage(publication._id)"
+                                    *ngIf="showImage == publication._id"
+                            >
+                                <i class="fas fa-window-close"></i>
+                            </button>
+                        </div>
+    
+                        <div class="col-lg-12" *ngIf="publication.file != 'null' && showImage == publication._id">
+                            <br>
+                            <img class="col-lg-12"  src="{{ url + 'get-image-publication/' + publication.file }}" alt="Image Profile"  />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    
+        <div class="col-lg-12 text-center" *ngIf="publications && publications.length && pages >= 2">
+            <p><button class="btn-sofka" (click)="viewMore()" *ngIf="!noMore">See more posts</button></p>
+        </div>   
 
-    <div class="col-lg-12 text-center" *ngIf="publications && publications.length">
-        <p><button class="btn-sofka" (click)="viewMore()" *ngIf="!noMore">See more posts</button></p>
-    </div>   
-</div>    
-
-<app-sidebar (sended)="refresh($event)"></app-sidebar>
-
-<div class="clearfix"></div>
+        <div id="noPublications" class="noPublicationsTimeLine" *ngIf="publications && publications.length == 0">
+            <div class="ohhh">
+                <img src="../../../assets/asteroid4.png" class="asteroid asteroid1" alt="">
+                <h3>¡Ohhh!</h3>
+                <img src="../../../assets/asteroid4.png" class="asteroid asteroid2" alt="">
+            </div>
+            <p>Your friends may not have posts, or follow someone else to see their posts</p>
+        </div>
+    </div>    
+    
+    <app-sidebar (sended)="refresh($event)"></app-sidebar>
+    
+    <div class="clearfix"></div>
+</div>

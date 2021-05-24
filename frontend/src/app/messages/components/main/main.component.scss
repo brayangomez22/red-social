@@ -1,3 +1,9 @@
 .main-message {
     color: #fff;
+
+    & .sidebar-admin {
+        background: #23243c !important;
+        box-shadow: 2px 2px 30px rgba(0,0,0,0.2);
+        border-radius: 7px;
+    }
 }

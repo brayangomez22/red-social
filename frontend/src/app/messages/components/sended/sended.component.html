@@ -1,7 +1,7 @@
 <div class="col-lg-12" style="color: #fff;">
     <h3>{{ title }}</h3>
 
-    <div class="people" *ngIf="messages">
+    <div class="people" *ngIf="messages && messages.length >= 1">
         <div *ngFor="let message of messages" class="item-user">
             <div class="panel panel-default" *ngIf="message.emitter">
                 <div class="panel-body" >
@@ -44,5 +44,14 @@
             <li *ngIf="page > 1"><a [routerLink]="['/messages/sent', prev_page]">Prev</a></li>
             <li *ngIf="pages != page"><a [routerLink]="['/messages/sent', next_page]">Next</a></li>
         </ul>
+    </div>
+
+    <div id="noPublications" *ngIf="messages && messages.length == 0">
+        <div class="ohhh">
+            <img src="../../../assets/asteroid4.png" class="asteroid asteroid1" alt="">
+            <h3>¡Ohhh!</h3>
+            <img src="../../../assets/asteroid4.png" class="asteroid asteroid2" alt="">
+        </div>
+        <p>You have not sent messages yet</p>
     </div>
 </div>

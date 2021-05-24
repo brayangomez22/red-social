@@ -2,68 +2,70 @@
     <h1 class="h1-strong">Hello {{ identity.name }}</h1>
 </div>
 
-<div id="user-card" class="col-lg-4 panel panel-default pull-left">
-    <div class="avatar pull-left">
-        <img src="{{ url + 'get-image-user/' + identity.image }}" alt="Profile Image" *ngIf="identity.image" />
-        <img src="assets/user.png" alt="Profile Image" *ngIf="!identity.image" />
-    </div>
-
-    <div class="name_surname pull-left">
-        <a [routerLink]="['/profile', identity._id]" class="username">
-            {{ identity.name + ' ' + identity.surname }}
-        </a>
-        <p class="nickname">{{ identity.nick }}</p>
+<div class="sidebar-social">
+    <div id="user-card" class="col-lg-4 panel panel-default pull-left">
+        <div class="avatar pull-left">
+            <img src="{{ url + 'get-image-user/' + identity.image }}" alt="Profile Image" *ngIf="identity.image" />
+            <img src="assets/user.png" alt="Profile Image" *ngIf="!identity.image" />
+        </div>
+    
+        <div class="name_surname pull-left">
+            <a [routerLink]="['/profile', identity._id]" class="username">
+                {{ identity.name + ' ' + identity.surname }}
+            </a>
+            <p class="nickname">{{ identity.nick }}</p>
+            <div class="clearfix"></div>
+        </div>
+    
         <div class="clearfix"></div>
-    </div>
-
-    <div class="clearfix"></div>
-
-    <div class="stats" *ngIf="stats">
-        <div class="following-data">
-            <a [routerLink]="['/following', identity._id,1]">
-                <span class="label-stats">Following  </span>
-                <span class="number-stats">{{ stats.following }}</span>
-            </a>
+    
+        <div class="stats" *ngIf="stats">
+            <div class="following-data">
+                <a [routerLink]="['/following', identity._id,1]">
+                    <span class="label-stats">Following  </span>
+                    <span class="number-stats">{{ stats.following }}</span>
+                </a>
+            </div>
+    
+            <div class="following-data">
+                <a [routerLink]="['/followed', identity._id,1]">
+                    <span class="label-stats">Followers  </span>
+                    <span class="number-stats">{{ stats.followed }}</span>
+                </a>
+            </div>
+    
+            <div class="following-data">
+                <a [routerLink]="['/profile', identity._id]">
+                    <span class="label-stats">Publications  </span>
+                    <span class="number-stats">{{ stats.publications }}</span>
+                </a>
+            </div>
         </div>
-
-        <div class="following-data">
-            <a [routerLink]="['/followed', identity._id,1]">
-                <span class="label-stats">Followers  </span>
-                <span class="number-stats">{{ stats.followed }}</span>
-            </a>
-        </div>
-
-        <div class="following-data">
-            <a [routerLink]="['/profile', identity._id]">
-                <span class="label-stats">Publications  </span>
-                <span class="number-stats">{{ stats.publications }}</span>
-            </a>
-        </div>
-    </div>
-</div>
-
-<div id="new-publication" class="col-lg-4 pull-left panel panel-default"> 
-
-    <div class="alert alert-success" *ngIf="status == 'success'">
-        Post successfully submitted
-    </div>
-
-    <div class="alert alert-danger" *ngIf="status == 'error'">
-        post not sent, please try again
     </div>
     
-    <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm, $event);" class="col-lg-10">
-        <p> 
-            <label for="text">What are you thinking today?</label>
-            <textarea #text="ngModel" [(ngModel)]="publication.text" name="text" id="text" class="form-control" required></textarea>
-            <span *ngIf="!text.valid && text.touched">The text of the publication is mandatory</span>
-        </p>
-
-        <p>
-            <label for="file">Upload your photo</label>
-            <input type="file" name="file" id="file" placeholder="Upload image" (change)="fileChangeEvent($event)">
-        </p>
-
-        <input type="submit" value="Send" class="btn btn-primary" [disabled]="!newPubForm.form.valid">
-    </form>
+    <div id="new-publication" class="col-lg-4 pull-left panel panel-default"> 
+    
+        <div class="alert alert-success" *ngIf="status == 'success'">
+            Post successfully submitted
+        </div>
+    
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            post not sent, please try again
+        </div>
+        
+        <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm, $event);" class="col-lg-10">
+            <p> 
+                <label for="text">What are you thinking today?</label>
+                <textarea #text="ngModel" [(ngModel)]="publication.text" name="text" id="text" class="form-control" required></textarea>
+                <span *ngIf="!text.valid && text.touched">The text of the publication is mandatory</span>
+            </p>
+    
+            <p>
+                <label for="file">Upload your photo</label>
+                <input type="file" name="file" id="file" placeholder="Upload image" (change)="fileChangeEvent($event)">
+            </p>
+    
+            <input type="submit" value="Send" class="btn btn-primary" [disabled]="!newPubForm.form.valid">
+        </form>
+    </div>
 </div>

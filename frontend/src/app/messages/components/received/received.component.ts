@@ -36,7 +36,7 @@ export class ReceivedComponent implements OnInit {
         private _followService: FollowService,
         private _userService: UserService
     ) {
-        this.title = 'Sent Messages';
+        this.title = 'Received messages';
         this.messages = [];
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();

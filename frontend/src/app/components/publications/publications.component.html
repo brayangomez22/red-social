@@ -1,4 +1,4 @@
-<div id="publications">
+<div id="publications" *ngIf="publications && publications.length != 0">
     <div *ngFor="let publication of publications" class="item-publication">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -27,6 +27,15 @@
     </div>
 </div>
 
-<div class="col-lg-12 text-center" *ngIf="publications && publications.length >= 4">
+<div id="noPublications" *ngIf="publications && publications.length == 0">
+    <div class="ohhh">
+        <img src="../../../assets/asteroid4.png" class="asteroid asteroid1" alt="">
+        <h3>¡Ohhh!</h3>
+        <img src="../../../assets/asteroid4.png" class="asteroid asteroid2" alt="">
+    </div>
+    <p>Sorry this user has not made any posts</p>
+</div>
+
+<div class="col-lg-12 text-center" *ngIf="publications && publications.length && pages >= 2">
     <p><button class="btn-sofka" (click)="viewMore()" *ngIf="!noMore">See more posts</button></p>
 </div>   

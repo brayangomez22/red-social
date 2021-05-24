@@ -3,7 +3,7 @@
 
     <div class="alert alert-success" *ngIf="status == 'success'">
         You have sent the message correctly, see it in 
-        <a [routerLink]="['/messages/sent']">
+        <a [routerLink]="['/messages/sent', 1]">
             your sent messages
         </a>
     </div>

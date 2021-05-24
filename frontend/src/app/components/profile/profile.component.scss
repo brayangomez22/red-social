@@ -1,6 +1,16 @@
 #data-profile {
+    position: relative;
     min-height: 500px;
     text-align: left;
+
+    & .data {
+        position: relative;
+        background: #23243c !important;
+        box-shadow: 2px 2px 30px rgba(0,0,0,0.2);
+        padding: 40px;
+        border-radius: 7px;
+        min-height: 270px;
+    }
 
     & .avatar {
         width: 185px;

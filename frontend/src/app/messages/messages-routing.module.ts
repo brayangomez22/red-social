@@ -13,7 +13,7 @@ const messagesRoutes: Routes = [
         path: 'messages',
         component: MainComponent,
         children: [
-            { path: '', redirectTo: 'received', pathMatch: 'full' },
+            { path: '', redirectTo: 'received/1', pathMatch: 'full' },
             { path: 'send', component: AddComponent, canActivate:[UserGuard] },
             { path: 'received', component: ReceivedComponent, canActivate:[UserGuard] },
             { path: 'received/:page', component: ReceivedComponent, canActivate:[UserGuard] },
