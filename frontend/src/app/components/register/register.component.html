@@ -1,12 +1,12 @@
 <section class="login-container">
-    <div class="alert alert-success" *ngIf="status == 'success'">
+    <div class="alert alert-success alert-login" *ngIf="status == 'success'">
         Registration completed successfully,  
         <a [routerLink]="['/login']">
             Sign in here
         </a>
     </div>
 
-    <div class="alert alert-danger" *ngIf="status == 'error'">
+    <div class="alert alert-danger alert-login" *ngIf="status == 'error'">
         The registration could not be completed, maybe your email or nickname is already in use, try again with other data
     </div>
 
