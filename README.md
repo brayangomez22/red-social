@@ -1,3 +1,10 @@
+# Backend
+
+This project was generated with [NodeJS](https://nodejs.org/en/) version v14.16.0.
+
+## Development server
+
+Run `npm start` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
 # Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
