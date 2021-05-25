@@ -1,3 +1,15 @@
+# Project preview
+
+> These screenshots are previews of the project running.
+
+![preview.](https://github.com/brayangomez22/red-social/blob/master/frontend/src/assets/previews/preview1.png)
+
+![preview.](https://github.com/brayangomez22/red-social/blob/master/frontend/src/assets/previews/preview2.png)
+
+![preview.](https://github.com/brayangomez22/red-social/blob/master/frontend/src/assets/previews/preview3.png)
+
+![preview.](https://github.com/brayangomez22/red-social/blob/master/frontend/src/assets/previews/preview4.png)
+
 # Backend
 
 This project was generated with [NodeJS](https://nodejs.org/en/) version v14.16.0.
