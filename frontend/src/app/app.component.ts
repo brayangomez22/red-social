@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, DoCheck {
         private _router: Router,
         private _useService: UserService
     ) {
-        this.title = 'SOFKASOCIAL';
+        this.title = 'SOFKA SOCIAL';
         this.url = GLOBAL.url;
     }
 
