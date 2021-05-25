@@ -1,4 +1,8 @@
-<div id="publications" *ngIf="publications && publications.length != 0">
+<div id="publications" *ngIf="publications && publications.length != 0"
+    [class.publicationOne]="publications.length == 1"
+    [class.publicationTwo]="publications.length == 2"
+    [class.publicationFour]="publications.length == 3"
+>
     <div *ngFor="let publication of publications" class="item-publication">
         <div class="panel panel-default">
             <div class="panel-body">

@@ -2,7 +2,11 @@
     <div class="col-lg-8">
         <h1 class="h1-strong">{{title}}</h1>
     
-        <div class="people">
+        <div class="people"
+            [class.publicationOne]="users.length == 1"
+            [class.publicationTwo]="users.length == 2"
+            [class.publicationFour]="users.length == 3"
+        >
             <div *ngFor="let user of users" class="item-user">
                 <div class="panel panel-default">
                     <div class="panel-body" *ngIf="user._id != identity._id">

@@ -35,3 +35,15 @@
         color: #fff;
     }
 }
+
+@media (max-width: 1199px) {
+    .publicationOne {
+        min-height: 80px !important;
+    }
+    .publicationTwo {
+        min-height: 270px !important;
+    }
+    .publicationFour {
+        min-height: 400px !important;
+    }
+}

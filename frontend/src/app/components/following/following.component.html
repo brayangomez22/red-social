@@ -2,7 +2,11 @@
     <div class="col-lg-8">
         <h1 class="h1-strong">{{title}} {{ user.name }}</h1>
     
-        <div class="people" *ngIf="following">
+        <div class="people" *ngIf="following"
+            [class.publicationOne]="following.length == 1"
+            [class.publicationTwo]="following.length == 2"
+            [class.publicationFour]="following.length == 3"
+        >
             <div *ngFor="let follow of following" class="item-user">
                 <div class="panel panel-default">
                     <div class="panel-body" >

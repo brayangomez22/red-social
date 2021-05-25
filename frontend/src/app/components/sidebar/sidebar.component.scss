@@ -55,7 +55,7 @@
     }
 
     & .stats {
-        border-top: 2px solid #eee;
+        border-top: 1px solid #eee;
         margin-top: 10px;
         
         & a:hover {
@@ -68,7 +68,7 @@
         padding-left: 18px;
         padding-right: 18px;
         margin-top: 10px;
-        border-right: 2px solid #eee;
+        border-right: 1px solid #eee;
 
         &:first-child {
             padding-left: 6px;
@@ -92,5 +92,11 @@
         border-radius: 3px;
         border: 1px solid #1b9bff;
         color: #fff;
+    }
+}
+
+@media (max-width: 1199px) {
+    #user-card, #new-publication {
+        width: 100%;
     }
 }
